@@ -9,9 +9,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
-
-        return $tasks;
+        return response()->json(Task::all());
     }
 
     public function store(Request $request)
@@ -26,7 +24,12 @@ class TaskController extends Controller
 
         $task = Task::create($validated);
 
-        return $task;
+        return response()->json($task, 201);
+    }
+
+    public function show(Task $task)
+    {
+        return response()->json($task);
     }
 
     public function update(Request $request, Task $task)
@@ -41,7 +44,7 @@ class TaskController extends Controller
 
         $task->update($validated);
 
-        return $task;
+        return response()->json($task);
     }
 
     public function destroy(Task $task)
